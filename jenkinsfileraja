@@ -1,0 +1,55 @@
+node {
+      echo "GitHub Branch Name ${env.Branch_Name}"
+      echo "Jenkins job nuber ${env.Build_Number}"
+      echo "Jenkins Node Name ${env.NODE_NAME}"
+  
+  echo "Jenkins Home ${env.JENKINS_HOME}"
+  echo "Jenkins URL ${env.JENKINS_URL}"
+  echo "JOB Name ${env.JOB_NAME}"
+  
+   properties([
+    buildDiscarder(logRotator(numToKeepStr: '3')),
+    pipelineTriggers([
+        pollSCM('* * * * *')
+    ])
+  ])
+  
+ def mavenHome=tool name: "mvn 3.6.2"
+    
+    stage ('git')
+ 
+{
+ git branch: 'development', credentialsId: 'f1d96cd0-b57e-4001-9199-5badda1adad1', url: 'https://github.com/raja3473/maven-web-application.git'   
+}
+
+stage('Build')
+
+{
+sh "${mavenHome}/bin/mvn clean package"
+ }
+  stage('sonar')
+
+{
+sh "${mavenHome}/bin/mvn clean sonar:sonar"
+ }  
+  stage('Nexus')
+
+{
+sh "${mavenHome}/bin/mvn clean deploy"
+ }  
+ stage('tomcat')
+ 
+ {
+   sshagent(['0e622f62-ed84-404c-84c8-51a567ffb070']) {
+sh "scp -o StrictHostKeyChecking=no target/*.war ec2-user@15.206.66.213:/opt/apache-tomcat-9.0.27/webapps/maven-web-application.war"
+
+}
+ }
+ stage('send emailNotification')
+ {
+  emailext attachLog: true, body: 'build is over', subject: 'email notification', to: 'peddineni.rajashekar123@gmail.com'
+  
+ }
+
+}
+
