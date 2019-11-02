@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://52.66.107.15:8081/repository/flipkart-repo/</url>
+	      <url>hhttp://15.206.122.221:8081/repository/flipkart-repo/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://52.66.107.15:8081/repository/flipkart-repo1/</url>
+	      <url>http://15.206.122.221:8081/repository/flipkart-repo1/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
