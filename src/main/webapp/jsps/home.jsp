@@ -20,7 +20,7 @@
 		Mithun Technologies, 
 		Martha Halli,Opp To Madhurai Iddly House
 		Bangalore.
-		+91-9980923226,
+		+91-9980923226,8553316522
 		<br>
 		<a href="mailto:devopstrainingblr@gmail.com">Mail to Mithun Technologies</a>
 	</span>
